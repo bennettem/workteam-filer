@@ -1,4 +1,4 @@
-INSERT INTO team (name)
+INSERT INTO department (name)
 VALUES 
 ("Engineering"),
 ("Legal"),
