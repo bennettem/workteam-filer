@@ -1,3 +1,5 @@
+USE employee_file;
+
 INSERT INTO department (name)
 VALUES 
 ("Engineering"),
