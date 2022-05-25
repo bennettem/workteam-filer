@@ -115,3 +115,43 @@ const addEmployee = () => {
     });
   });
 };
+
+const updateEmployee = () => {
+  db.query("SELECT * From role", (err, res) => {
+    if (err) throw err;
+    inquirer
+      .prompt([
+        {
+          type: "input",
+          name: "firstName",
+          message: "What is the employee's first name?",
+          answer: res.map((employee) => employee.first_name),
+        },
+        {
+          type: "list",
+          name: "role_id",
+          message: "What is the employee's new role?",
+          choices: res.map((role) => role.title),
+        },
+      ])
+      .then(function (answer) {
+        const roleId = res.find((role) => role.title === answer.role_id).id;
+        db.query(
+          "UPDATE employees SET ? WHERE ?",
+          [
+            {
+              role_id: roleId,
+            },
+            {
+              first_name: answer.firstName,
+            },
+          ],
+          function (err) {
+            if (err) throw err;
+            console.log("Role updated!");
+            actionPrompt();
+          }
+        );
+      });
+  });
+};
