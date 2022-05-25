@@ -137,7 +137,7 @@ const updateEmployee = () => {
       .then(function (answer) {
         const roleId = res.find((role) => role.title === answer.role_id).id;
         db.query(
-          "UPDATE employees SET ? WHERE ?",
+          "UPDATE employee SET ? WHERE ?",
           [
             {
               role_id: roleId,
@@ -148,7 +148,7 @@ const updateEmployee = () => {
           ],
           function (err) {
             if (err) throw err;
-            console.log("Role updated!");
+            console.log(`${answer.firstName} has been updated!`);
             actionPrompt();
           }
         );
